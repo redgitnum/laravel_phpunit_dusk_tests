@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +17,12 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->middleware('guest');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', [
+        'products' => Product::all()
+    ]);
 })->middleware(['auth'])->name('dashboard');
 
 Route::post('/dashboard/add', [ProductController::class, 'store'])->middleware('auth')->name('dashboard.add');
