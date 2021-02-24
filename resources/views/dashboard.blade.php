@@ -45,6 +45,7 @@
                                     <th class="border p-2">Name</th>
                                     <th class="border p-2">Location</th>
                                     <th class="border p-2">Count</th>
+                                    <th class="border p-2">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,6 +55,14 @@
                                     <td class="border border-gray-500 p-2">{{ $product->name }}</td>
                                     <td class="border border-gray-500 p-2">{{ $product->location }}</td>
                                     <td class="border border-gray-500 p-2">{{ $product->count }}</td>
+                                    <td class="border border-gray-500 p-2">
+                                        <form action="{{ route('dashboard.delete') }}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <input type="hidden" name='id' value="{{ $product->id }}">
+                                            <button class="bg-red-600 text-white p-2 rounded">DELETE</button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

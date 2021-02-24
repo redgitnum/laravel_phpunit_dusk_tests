@@ -30,6 +30,11 @@ class ProductController extends Controller
             return back()->withErrors($e, 'Something went wrong');
         }
         return back()->with('success', 'Product saved successfully!');
-        
+    }
+
+    public function delete(Request $request)
+    {
+        Product::find($request->id)->first()->delete();
+        return back()->with('delete', 'Product deleted successfully');
     }
 }
